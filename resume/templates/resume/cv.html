@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ person.name }}'s Resume</title>
+    <link rel="stylesheet" href="{% static 'resume/style.css' %}">
+</head>
+<body>
+    <div class="card">
+        <header>
+            <h2>{{ person.name }}</h2><br>
+            <p>Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a></p>
+            <p>Phone: {{ person.phone }}</p>
+            <p>LinkedIn: <a href="{{ person.linkedin_url }}">{{ person.linkedin_url }}</a></p>
+        </header>
+    
+        <section>
+            <h2>Education</h2>
+            <hr>
+            {% for edu in person.education.all reversed%}
+                <div class="cventry">
+                    <div class="container">
+                        <p><b>{{ edu.degree }}</b></p>
+                        <p><b>{{ edu.location }}</b></p>
+                    </div>
+                    <div class="container">
+                        <p><i>{{ edu.institution }}</i></p>
+                        <p>{{ edu.start_year|date:"F, Y" }} - {{ edu.end_year|date:"F, Y"|default:"Present" }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    
+        <section>
+            <h2>Technical Skills</h2>
+            <hr>
+            <ul type="circle">
+                {% for skill in person.skills.all %}
+                    <li><b>{{ skill.category }}: </b>{{ skill.skills_list }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    
+        <section>
+            <h2>Experiences</h2>
+            <hr>
+            {% for exp in person.experiences.all reversed%}
+                <div cventry>
+                    <div class="container">
+                        <p><b>{{ exp.title }}</b></p>
+                        <p><b>{{ exp.location }}</b></p>
+                    </div>
+                    <div class="container">
+                        <p><i>{{exp.company }}</i></p>
+                        <p>{{ exp.start_date|date:"F, Y" }} - {{ exp.end_date|date:"F, Y"|default:"Present" }}</p>
+                    </div>
+                    <ul type="circle">
+                        {% for detail in exp.expirence_details.all %}
+                            <li>{{detail.description}}</li>
+                        {% endfor %}        
+                    </ul>
+                </div>
+            {% endfor %}
+        </section>
+    
+        <section>
+            <h2>Projects</h2>
+            <hr>
+            {% for proj in person.projects.all %}
+                <div>
+                    <p><b>{{ proj.title }}</p></b></p>
+                    <ul type="circle">
+                        {% for detail in proj.project_details.all %}
+                            <li>{{detail.description}}</li>
+                        {% endfor %}        
+                    </ul>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+</body>
+</html>
