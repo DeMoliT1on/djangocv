@@ -4,6 +4,16 @@ body {
     justify-content: center;
 }
 
+header {
+    text-align: center;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
 .card {
     width: 60%;
     max-width: 1200px; /* Optional: to prevent it from getting too large on big screens */

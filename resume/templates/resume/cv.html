@@ -5,14 +5,20 @@
     <meta charset="UTF-8">
     <title>{{ person.name }}'s Resume</title>
     <link rel="stylesheet" href="{% static 'resume/style.css' %}">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
 </head>
 <body>
     <div class="card">
         <header>
             <h2>{{ person.name }}</h2><br>
-            <p>Email: <a href="mailto:{{ person.email }}">{{ person.email }}</a></p>
-            <p>Phone: {{ person.phone }}</p>
-            <p>LinkedIn: <a href="{{ person.linkedin_url }}">{{ person.linkedin_url }}</a></p>
+            <div class="info">
+                <p><i class="fa-regular fa-envelope"></i><a href="mailto:{{ person.email }}"> {{ person.email }}</a></p>
+                <p><i class="fa-solid fa-mobile-screen"></i> {{ person.phone }}</p>
+                <p><i class="fa-brands fa-linkedin"></i> <a href="{{ person.linkedin_url }}">{{ person.name }}</a></p>
+            </div>
         </header>
     
         <section>
